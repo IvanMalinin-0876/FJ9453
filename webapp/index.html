@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8">
+
+		<title>test</title>
+
+		<script id="sap-ui-bootstrap"
+			src="../../resources/sap-ui-core.js"
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_belize"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-resourceroots='{"Datatest": ""}'>
+		</script>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	
+		
+		<!-- XML-based view definition -->
+        <script id="htmlView" type="sapui5/xmlview">
+<mvc:View
+  controllerName="myView.HTML"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  class="viewPadding">
+  <App>
+  <pages>
+<Page
+    title="HTML Container"
+    class="marginBoxContent" >
+    <content>
+<html:iframe target='_top' src="http://localhost:8082/" id ="attachmentframe" height="98%" width="100%">
+</html:iframe>
+    </content>
+  </Page>
+  </pages>
+  </App>
+  </mvc:View>
+        </script>
+        <script>
+// Controller definition
+sap.ui.controller("myView.HTML", {
+
+	onInit: function() {
+	var oFrame = sap.ui.getCore().byId("__xmlview0--attachmentframe");
+	var oAttributes = oFrame._xContent.attributes;
+	var oValues = {"target": oAttributes[0].value, "src":oAttributes[1].value, "id":oAttributes[2].value, "height":oAttributes[3].value, "width": oAttributes[4].value};
+	// alert(JSON.stringify(oValues));
+	}
+});         
+     // Instantiate the View, assign a model
+     // and display
+        var oView = sap.ui.xmlview({
+        viewContent: jQuery('#htmlView').html()
+        });
+            
+        oView.placeAt('content');
+        </script>
+		
+			<!--<script>-->
+		<!--	sap.ui.getCore().attachInit(function() {-->
+		<!--		new sap.m.Shell({-->
+		<!--			app: new sap.ui.core.ComponentContainer({-->
+		<!--				height : "100%",-->
+		<!--				name : "Datatest"-->
+		<!--			})-->
+		<!--		}).placeAt("content");-->
+		<!--	});-->
+		<!--</script>-->
+	</head>
+
+	<body class="sapUiBody" id="content">
+		
+	
+	</body>
+
+</html>
